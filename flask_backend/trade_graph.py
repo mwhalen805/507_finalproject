@@ -13,9 +13,29 @@ class TradeGraph:
 
     Methods
     -------
+    add_edge (country_a, country_b)
+        Constructs an edge between the provided two countries
     
+    load_trade_data(data)
+        loads trade data from a provided json file
+
+    bfs (start)
+        a basic bfs for the graph starting at search
+    
+    shortest_path (start, end)
+        finds the shortest path via trade routes between two countries 
+    
+    number_of_connections
+        sorts countries by number of trade partners
+
+    clusters_on_graph (graph)
+        finds all clusters in the graph
+
+    bottleneck_clusters
+        finds all bottlenecks and the clusters on each side of them
     """
 
+    
 
        
 
@@ -154,31 +174,6 @@ class TradeGraph:
         )
     
     def clusters_on_graph(self, graph):
-        visited = set()
-        all_clusters = []
-        for country in list(graph.keys()):
-            if country not in visited:
-                comp = self.bfs_on_graph(graph, country)
-                for c in comp:
-                    visited.add(c)
-                all_clusters.append(list(comp))
-        return all_clusters
-
-    def bfs_on_graph(self, graph, start):
-        if start not in graph:
-            return []
-        visited = set()
-        queue = deque([start])
-        while queue:
-            node = queue.popleft()
-            if node not in visited:
-                visited.add(node)
-                for neighbor in graph[node]:
-                    if neighbor not in visited:
-                        queue.append(neighbor)
-        return visited
-    
-    def clusters(self):
         """
         Provides list of connected components where each component is a list of country nodes 
         
@@ -190,44 +185,13 @@ class TradeGraph:
         """
         visited = set()
         all_clusters = []
-
-        for country in list(self.graph.keys()):
+        for country in list(graph.keys()):
             if country not in visited:
                 comp = self.bfs(country)
                 for c in comp:
                     visited.add(c)
-                all_clusters.append(comp)
-
+                all_clusters.append(list(comp))
         return all_clusters
-    
-    def bottlenecks(self):
-        """
-        Finds countries that connect clusters together
-        
-        Returns
-        ----------
-        list
-            A list of bottleneck countries
-
-        """
-        result = []
-        original_nodes = list(self.graph.keys())
-        base_cluster_count = len(self.clusters_on_graph(self.graph))
-        import copy
-        for node in original_nodes:
-            
-            temp_graph = copy.deepcopy(self.graph)
-            
-            if node in temp_graph:
-                for n in temp_graph[node]:
-                    temp_graph[n].discard(node)
-                del temp_graph[node]
-            clusters_after = len(self.clusters_on_graph(temp_graph))
-            if clusters_after > base_cluster_count:
-                result.append(node)
-        
-        return result
-    
     
     def bottleneck_clusters(self):
         """
@@ -330,8 +294,7 @@ def main():
         print("3. Show top countries by number of connections")
         print("4. Show number of clusters")
         print("5. Show bottleneck countries (bottleneck_clusters)")
-        print("6. Show bottleneck countries (bottlenecks)")
-        print("7. Quit")
+        print("6. Quit")
     
         choice = input("\nChoose an option: ").strip()
 
@@ -373,7 +336,7 @@ def main():
                     print(f"{name} ({c}): {deg}")
         
         elif choice == "4":
-            clusters = tg.clusters()
+            clusters = tg.clusters_on_graph(tg)
             print(f"Total number of trade clusters: {len(clusters)}")
             sizes = [len(cluster) for cluster in clusters]
             print("Cluster sizes:", sizes)
@@ -388,16 +351,6 @@ def main():
                 print(bottlenecks)
         
         elif choice == "6":
-            bottlenecks = tg.bottlenecks()
-            bottleneck_countries = []
-            if not bottlenecks:
-                print("No bottleneck countries detected.")
-            else:
-                print("Bottleneck countries (countries whose removal increases the number of trade clusters):")
-                print(bottlenecks)
-        
-        
-        elif choice == "7":
             print("Thank you for visiting!")
             break
 
