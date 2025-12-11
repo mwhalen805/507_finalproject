@@ -289,11 +289,11 @@ def main():
 
     while True:
         print("\nOptions:")
-        print("1. Check neighbors of a country")
+        print("1. Find trade partners of a country")
         print("2. Find shortest path between two countries")
         print("3. Show top countries by number of connections")
         print("4. Show number of clusters")
-        print("5. Show bottleneck countries (bottleneck_clusters)")
+        print("5. Show bottleneck countries")
         print("6. Quit")
     
         choice = input("\nChoose an option: ").strip()
@@ -336,18 +336,17 @@ def main():
                     print(f"{name} ({c}): {deg}")
         
         elif choice == "4":
-            clusters = tg.clusters_on_graph(tg)
+            clusters = tg.clusters_on_graph(tg.graph)
             print(f"Total number of trade clusters: {len(clusters)}")
             sizes = [len(cluster) for cluster in clusters]
             print("Cluster sizes:", sizes)
         
         elif choice == "5":
             bottlenecks = tg.bottleneck_clusters()
-            bottleneck_countries = []
             if not bottlenecks:
                 print("No bottleneck countries detected.")
             else:
-                print("Bottleneck countries (countries whose removal increases the number of trade clusters):")
+                print("Bottleneck countries:")
                 print(bottlenecks)
         
         elif choice == "6":
