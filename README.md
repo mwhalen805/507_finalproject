@@ -1,7 +1,7 @@
 # SI 507 Final Project
 ## 2024 Trade Data Interface
 
-This project allows users to interact with trade data from 2024. The base is a python program that reads json data from [comtrade] (https://comtradeplus.un.org) and constructs a graph with countries as nodes and trade relationships as edges. The comtrade data can be accessed in this [Google folder] (https://drive.google.com/drive/folders/1cGpCeNdZDeHQLQaLpxNOuKgubnINmEJ0?usp=sharing). Users can:
+This project allows users to interact with trade data from 2024. The base is a python program that reads json data from [comtrade](https://comtradeplus.un.org) and constructs a graph with countries as nodes and trade relationships as edges. The comtrade data can be accessed in this [Google folder](https://drive.google.com/drive/folders/1cGpCeNdZDeHQLQaLpxNOuKgubnINmEJ0?usp=sharing). Users can:
 - Find the trade partners of a given country
 - Find the shortest trade route between two countries
 - Show the top countries by number of trade partners
