@@ -1,7 +1,7 @@
 # SI 507 Final Project
 ## 2024 Trade Data Interface
 
-This project allows users to interact with trade data from 2024. The base is a python program that reads json data from [comtrade](https://comtradeplus.un.org) and constructs a graph with countries as nodes and trade relationships as edges. The comtrade data can be accessed in this [Google folder](https://drive.google.com/drive/folders/1cGpCeNdZDeHQLQaLpxNOuKgubnINmEJ0?usp=sharing), as it could not be uploaded to the repo due to its size. This data was originally downloaded from [comtrade](https://comtradeplus.un.org)'s premium institutional api, as U-M has a license. I also downloaded a countries csv from the site to map countries to their 3 digit codes in order to be able to display country names to the user. This file was converted to a json and can be found in flask_backend/country_name_to_code.json. 
+This project allows users to interact with trade data from 2024. The base is a python program that reads json data from [comtrade](https://comtradeplus.un.org) and constructs a graph with countries as nodes and trade relationships as edges. The comtrade data can be accessed in this [Google Drive folder](https://drive.google.com/drive/folders/1cGpCeNdZDeHQLQaLpxNOuKgubnINmEJ0?usp=sharing), as it could not be uploaded to the repo due to its size. This data was originally downloaded from [comtrade](https://comtradeplus.un.org)'s premium institutional api, as U-M has a license. I also downloaded a countries csv from the site to map countries to their 3 digit codes in order to be able to display country names to the user. This file was converted to a json and can be found in flask_backend/country_name_to_code.json. 
 
 Comtrade data summary: This is a very large file containing data on all trades conducted between countries in the year 2024. For this project I used "reporterCode" (the country reporting the trade) and "partnerCode" (the country being traded with) fields to find the countries with a trade relationship. In a next phase of the project, I would also like to use "cmdCode" (commodity code) to see what goods are being traded. 
 
@@ -14,7 +14,7 @@ Users can interact with the base program by running trade_graph.py and respondin
 - View the total number of trade clusters
 - Find the bottleneck countries
 
-Note that trade_graph.py is quite slow due to the large volume of data it must pull, so it make take 30 seconds to a minute to load. 
+Note that trade_graph.py is quite slow due to the large volume of data it must pull, so it may take 30 seconds to a minute to load. 
 
 I also developed a web app to display this information in a more visual way. I used Flask for the back end and React for the front end. To access the web app:
 1. Open a terminal, cd into the flask_backend folder, and run "python app.py"
