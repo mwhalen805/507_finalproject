@@ -10,16 +10,9 @@ const nameToCode: Record<string, string> = countryDataJson;
 const geoUrl =
   "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
-interface Bottleneck {
-  country: string;
-  [key: string]: any;
-}
-
 interface WorldMapProps {
   selectedCountry: string | null;
   partners: string[];
-  bottlenecks: Bottleneck[];
-  clusters: string[][];
   onCountryClick: (country: string) => void;
 }
 
